@@ -11,6 +11,18 @@ const SearchParams = () => {
   const [animal, AnimalDropdown] = useDropdown("Animal", "Dog", ANIMALS);
   const [breed, BreadDropdown, setBreed] = useDropdown("Breed", "", breeds);
 
+  const [pets, setPets] = useState([]);
+
+  async function requestPets() {
+    const { animals } = await pet.animals({
+      location,
+      breed,
+      type: animal,
+    });
+
+    setPets(animals || []);
+  }
+
   // After the render is done
   useEffect(() => {
     setBreeds([]);
@@ -24,7 +36,12 @@ const SearchParams = () => {
 
   return (
     <div className="search-params">
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestPets();
+        }}
+      >
         <label htmlFor="location">
           Location
           <input
