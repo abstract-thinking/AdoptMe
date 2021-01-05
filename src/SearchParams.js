@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import pet, { ANIMALS } from "@frontendmasters/pet";
 import useDropdown from "./useDropdown.js";
+import Results from "./Results.js";
 
 const SearchParams = () => {
   // const location will change because not handle of user input happens
@@ -55,6 +56,7 @@ const SearchParams = () => {
         <BreadDropdown />
         <button>Submit</button>
       </form>
+      <Results pets={pets} />
     </div>
   );
 };
