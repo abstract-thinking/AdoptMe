@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import SearchParams from "./SearchParams";
-import { Router, Link} from "@reach/router";
+import { Router, Link } from "@reach/router";
 import Details from "./Details";
 
 const App = () => {
