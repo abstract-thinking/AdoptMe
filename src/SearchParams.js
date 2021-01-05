@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ANIMALS } from "@frontendmasters/pet";
+import React, { useState, useEffect } from "react";
+import pet, { ANIMALS } from "@frontendmasters/pet";
 import useDropdown from "./useDropdown.js";
 
 const SearchParams = () => {
@@ -9,7 +9,18 @@ const SearchParams = () => {
   const [breeds, setBreeds] = useState([]);
 
   const [animal, AnimalDropdown] = useDropdown("Animal", "Dog", ANIMALS);
-  const [breed, BreadDropdown] = useDropdown("Breed", "", breeds);
+  const [breed, BreadDropdown, setBreed] = useDropdown("Breed", "", breeds);
+
+  // After the render is done
+  useEffect(() => {
+    setBreeds([]);
+    setBreed("");
+
+    pet.breeds(animal).then(({ apiBreeds }) => {
+      const breedStrings = apiBreeds.map(({ name }) => name);
+      setBreeds(breedStrings);
+    }, console.error);
+  }, [animal]);
 
   return (
     <div className="search-params">
