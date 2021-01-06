@@ -17,13 +17,13 @@ class ErrorBoundary extends Component {
 
   componentDidUpdate() {
     if (this.state.hasError) {
-        setTimeout(()=> this.setState({redirect: true}), 5000);
+      setTimeout(() => this.setState({ redirect: true }), 5000);
     }
   }
 
   render() {
     if (this.state.redirect) {
-        return <Redirect to="/" />;
+      return <Redirect to="/" />;
     }
 
     if (this.state.hasError) {
